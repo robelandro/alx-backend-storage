@@ -8,6 +8,9 @@ from typing import Union
 
 
 class Cache:
+    """
+    This class is a wrapper around the Redis client.
+    """
     _redis = redis.Redis()
 
     def __init__(self) -> None:
