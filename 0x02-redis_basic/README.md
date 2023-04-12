@@ -16,3 +16,4 @@
 | # | Method | Description |
 | --- | --- | --- |
 | 1 | count_calls | count how many time a method is called |
+| 2 | call_history | store the history of inputs and outputs for a particular function |
