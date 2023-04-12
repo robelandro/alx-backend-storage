@@ -2,7 +2,7 @@
 
 ## 🧾 about
 
-have class Cache see the tabele to exstig method
+- have class Cache see the tabele to exstig method
 
 | # | Method | Description |
 | --- | --- | --- |
@@ -10,3 +10,9 @@ have class Cache see the tabele to exstig method
 | 2 | get | get data from redis |
 | 3 | get_str | get data from redis |
 | 4 | get_int | get data from redis |
+
+- have the follwing warper method
+
+| # | Method | Description |
+| --- | --- | --- |
+| 1 | count_calls | count how many time a method is called |
