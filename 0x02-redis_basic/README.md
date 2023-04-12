@@ -17,3 +17,4 @@
 | --- | --- | --- |
 | 1 | count_calls | count how many time a method is called |
 | 2 | call_history | store the history of inputs and outputs for a particular function |
+| 3 | replay | display the history of calls of a particular function |

@@ -51,6 +51,23 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
+def replay(method: Callable) -> None:
+    """
+    Replays the history of a function
+    :param method: The `method` parameter is a function
+    :type method: Callable
+    :return: None
+    """
+    name = method.__qualname__
+    cache = redis.Redis()
+    calls = cache.get(name).decode("utf-8")
+    print(f"{name} was called {calls} times:")
+    inputs = cache.lrange(f"{name}:inputs", 0, -1)
+    outputs = cache.lrange(f"{name}:outputs", 0, -1)
+    for i, o in zip(inputs, outputs):
+        print(f"{name}(*{i.decode('utf-8')}) -> {o.decode('utf-8')}")
+
+
 class Cache:
     """
     This class is a wrapper around the Redis client.
