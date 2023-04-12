@@ -7,6 +7,7 @@ import uuid
 from typing import Union, Callable, Optional
 from functools import wraps
 
+
 def count_calls(method: Callable) -> Callable:
     """
     Counts the number of times a method is called.
@@ -25,6 +26,7 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 class Cache:
     """
     This class is a wrapper around the Redis client.
@@ -36,7 +38,7 @@ class Cache:
         """
         self._redis = redis.Redis()
         self._redis.flushdb()
-    
+
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
@@ -54,7 +56,7 @@ class Cache:
             fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """
         This is a Python function that retrieves a value from Redis.
-        
+
         :param key: A string representing the key.
         :type key: str
         :param fn: The parameter `fn` an optional argument of type `Callable`
@@ -69,7 +71,7 @@ class Cache:
     def get_str(self, key: str) -> str:
         """
         This function retrieves a string value
-        
+
         :param key: The `key` parameter is a string
         :type key: str
         :return: The function `get_str` is returning a string value
@@ -80,7 +82,7 @@ class Cache:
     def get_int(self, key: str) -> int:
         """
         This function retrieves an integer value
-        
+
         :param key: The `key` parameter is a string
         :type key: str
         :return: This function returns an integer value
