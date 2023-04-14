@@ -9,7 +9,7 @@ from typing import Callable
 import requests
 
 
-redis_ = redis.Redis()
+_redis = redis.Redis()
 
 
 def count_requests(method: Callable) -> Callable:
@@ -18,14 +18,17 @@ def count_requests(method: Callable) -> Callable:
     :type method: Callable
     :return: The function `count_requests` returns a function"""
     @wraps(method)
-    def wrapper(url):
-        """ Wrapper for decorator """
-        redis_.incr(f"count:{url}")
-        cached_html = redis_.get(f"cached:{url}")
-        if cached_html:
-            return cached_html.decode('utf-8')
-        html = method(url)
-        redis_.setex(f"cached:{url}", 10, html)
+    def wrapper(*args, **kwargs):
+        """
+        wrapper function
+        """
+        _redis.incr(f"count:{args[0]}")
+
+        html = _redis.get("html-cache:{args[0]}")
+        if html is not None:
+            return html.decode("utf-8")
+        html = method(*args, **kwargs)
+        _redis.setex(f"html-cache:{args[0]}", 10, html)
         return html
 
     return wrapper
